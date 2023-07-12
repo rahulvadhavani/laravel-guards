@@ -16,3 +16,18 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// Admin User
+Route::prefix('admin')->name('admin.')
+    ->middleware('web')
+    ->namespace('admin')
+    ->group(base_path('routes/admin.php'));
+// Staff User
+Route::prefix('staff')->name('staff.')
+    ->middleware('web')
+    ->namespace('admin')
+    ->group(base_path('routes/staff.php'));
